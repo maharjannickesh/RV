@@ -41,6 +41,12 @@ public class UserServiceImpl implements UserService {
 		return null;
 	}
 
+	@Override
+	public UserEntity saveUser(UserEntity userEntity) {
+		return userRepository.save(userEntity);
+	}
+	
+
 	
 
 }

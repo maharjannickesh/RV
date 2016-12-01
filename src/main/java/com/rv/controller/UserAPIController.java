@@ -1,5 +1,6 @@
 package com.rv.controller;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collector;
@@ -60,13 +61,29 @@ public class UserAPIController {
 
 	}
 
-	@RequestMapping(value = "/{user}/visits/states")
+	@RequestMapping(value = "/{user}/visits/states", method = RequestMethod.GET)
 	public Set<String> visitedState(@PathVariable("user") String user) {
 		UserEntity userEntity = userService.getUserByFirstName(user);
 		Set<CityEntity> userCities = userEntity.getCities();
 		Set<String> state = userCities.stream().map(c -> c.getStateEntity().getName()).collect(Collectors.toSet());
 		return state;
 	}
-	
+
+	@RequestMapping(value = "/{user}/visits/{visit}/{state}", method = RequestMethod.GET)
+	public Set<CityEntity> deleteVisitedCity(@PathVariable("user") String user, @PathVariable("visit") String city,
+			@PathVariable("state") String state) {
+		UserEntity userEntity = userService.getUserByFirstName(user);
+		Set<CityEntity> cities = userEntity.getCities();
+		Iterator<CityEntity> itr = cities.iterator();
+		while (itr.hasNext()) {
+			CityEntity cityNext = itr.next();
+			if (cityNext.getName().equals(city) && cityNext.getStateEntity().getAbbreviation().equals(state)) {
+				cities.remove(cityNext);
+			}
+		}
+		userEntity.setCities(cities);
+		return userService.saveUser(userEntity).getCities();
+
+	}
 
 }

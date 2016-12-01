@@ -12,4 +12,6 @@ public interface UserService {
 
 	public Set<UserEntity> getAllCityUserVisitedByUserFirstName(String user);
 
+	public UserEntity saveUser(UserEntity userEntity);
+
 }
