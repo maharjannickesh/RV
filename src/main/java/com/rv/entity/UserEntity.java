@@ -5,6 +5,8 @@ import java.sql.Date;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -37,6 +39,9 @@ public class UserEntity implements Serializable {
 	@OneToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "user_city", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "city_id"))
 	private Set<CityEntity> cities;
+
+	@Enumerated(EnumType.STRING)
+	private Role role;
 
 	@NotEmpty
 	@Column(name = "DateAdded")
@@ -82,6 +87,14 @@ public class UserEntity implements Serializable {
 		this.cities = cities;
 	}
 
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
 	public Date getDateAdded() {
 		return dateAdded;
 	}
@@ -105,6 +118,5 @@ public class UserEntity implements Serializable {
 	public void setLastUpdated(Date lastUpdated) {
 		this.lastUpdated = lastUpdated;
 	}
-
 
 }

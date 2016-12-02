@@ -6,17 +6,46 @@
 		http://www.springframework.org/schema/security
 		http://www.springframework.org/schema/security/spring-security.xsd">
 
-	<http>
-		<intercept-url pattern="/user" access="ROLE_ADMIN" />
-		<form-login />
-		<logout />
-	</http>
+
 
 	<authentication-manager>
+		<!-- <authentication-provider> -->
+		<!-- <user-service> -->
+		<!-- <user name="admin" password="admin" authorities="ROLE_USER, ROLE_ADMIN" 
+			/> -->
+		<!-- </user-service> -->
+		<!-- </authentication-provider> -->
+
 		<authentication-provider>
+			<password-encoder hash="bcrypt" />
 			<user-service>
-				<user name="admin" password="admin" authorities="ROLE_USER, ROLE_ADMIN" />
+				<user name="user"
+					password="$2a$08$zPcG7krLe6ZNBSGRmatD2eAW.lKwX6CqrQhz0p.5HCqmq0S3OfsVK"
+					authorities="ROLE_USER" />
+				<user name="admin"
+					password="$2a$08$zPcG7krLe6ZNBSGRmatD2eAW.lKwX6CqrQhz0p.5HCqmq0S3OfsVK"
+					authorities="ROLE_ADMIN" />
+				<user name="super"
+					password="$2a$08$zPcG7krLe6ZNBSGRmatD2eAW.lKwX6CqrQhz0p.5HCqmq0S3OfsVK"
+					authorities="ROLE_USER,ROLE_ADMIN" />
 			</user-service>
 		</authentication-provider>
+
+		<authentication-provider>
+			<password-encoder hash="bcrypt" />
+			<jdbc-user-service data-source-ref="dataSource"
+				users-by-username-query="SELECT username, password, enabled FROM user WHERE username = ?"
+				authorities-by-username-query="SELECT * FROM user WHERE username = ?" />
+		</authentication-provider>
+
 	</authentication-manager>
+
+
+	<http create-session="stateless" use-expressions="true">
+		<intercept-url pattern="/**"
+			access="hasAnyRole('ROLE_ADMIN, ROLE_USER')" />
+		<http-basic />
+	</http>
+
+
 </beans:beans>

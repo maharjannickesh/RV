@@ -1,6 +1,5 @@
 package com.rv.controller;
 
-
 import java.util.List;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,23 +33,19 @@ public class UserAPIController {
 		return userService.visitedCity(user);
 
 	}
-	
 
 	@RequestMapping(value = "/{user}/visits/states", method = RequestMethod.GET)
 	public Set<String> visitedState(@PathVariable("user") String user) {
-		
+
 		return userService.visitedState(user);
-		
-		
+
 	}
 
 	@RequestMapping(value = "/{user}/visits/{visit}/{state}", method = RequestMethod.GET)
 	public Set<CityEntity> deleteVisitedCity(@PathVariable("user") String user, @PathVariable("visit") String city,
 			@PathVariable("state") String state) {
-		
+
 		return userService.deleteVisitedCity(user, city, state);
-		
-		
 
 	}
 
