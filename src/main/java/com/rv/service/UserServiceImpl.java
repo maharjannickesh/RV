@@ -23,9 +23,6 @@ public class UserServiceImpl implements UserService {
 	private CityService cityService;
 
 	@Autowired
-	private UserService userService;
-
-	@Autowired
 	private StateService stateService;
 
 	@Override
@@ -47,14 +44,14 @@ public class UserServiceImpl implements UserService {
 	public UserEntity insertVisitedCity(UserCityDTO userCityDTO, String user) {
 		if (cityService.validateCity(userCityDTO.getCity()) && stateService.verifyState(userCityDTO.getState())
 				&& cityService.validateCityAndState(userCityDTO.getCity(), userCityDTO.getState())) {
-			UserEntity userEntity = userService.getUserByFirstName(user);
+			UserEntity userEntity = getUserByFirstName(user);
 			CityEntity cityEntity = cityService.getCityByNameAndState(userCityDTO.getCity(), userCityDTO.getState());
 
 			Set<CityEntity> userCities = userEntity.getCities();
 			userCities.add(cityEntity);
 			userEntity.setCities(userCities);
 
-			return userService.saveNewCityVisited(userEntity);
+			return saveNewCityVisited(userEntity);
 
 		}
 
@@ -63,7 +60,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<String> visitedCity(String user) {
-		UserEntity userEntity = userService.getUserByFirstName(user);
+		UserEntity userEntity = getUserByFirstName(user);
 		Set<CityEntity> userCities = userEntity.getCities();
 		List<String> cities = userCities.stream().map(c -> c.getName()).collect(Collectors.toList());
 		return cities;
@@ -71,7 +68,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Set<String> visitedState(String user) {
-		UserEntity userEntity = userService.getUserByFirstName(user);
+		UserEntity userEntity = getUserByFirstName(user);
 		Set<CityEntity> userCities = userEntity.getCities();
 		Set<String> state = userCities.stream().map(c -> c.getStateEntity().getName()).collect(Collectors.toSet());
 		return state;
@@ -79,7 +76,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Set<CityEntity> deleteVisitedCity(String user, String city, String state) {
-		UserEntity userEntity = userService.getUserByFirstName(user);
+		UserEntity userEntity = getUserByFirstName(user);
 		Set<CityEntity> cities = userEntity.getCities();
 		Iterator<CityEntity> itr = cities.iterator();
 		while (itr.hasNext()) {
@@ -89,7 +86,7 @@ public class UserServiceImpl implements UserService {
 			}
 		}
 		userEntity.setCities(cities);
-		return userService.saveUser(userEntity).getCities();
+		return saveUser(userEntity).getCities();
 	}
 
 }

@@ -53,5 +53,7 @@
 		<property name="username" value="${username}" />
 		<property name="password" value="${password}" />
 	</bean>
+	
+	<import resource="security.xml"/>
 
 </beans>
