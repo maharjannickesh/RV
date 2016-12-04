@@ -1,6 +1,5 @@
 package com.rv.service;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -76,17 +75,22 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Set<CityEntity> deleteVisitedCity(String user, String city, String state) {
-		UserEntity userEntity = getUserByFirstName(user);
+		UserEntity userEntity = getUserByUsername(user);
 		Set<CityEntity> cities = userEntity.getCities();
-		Iterator<CityEntity> itr = cities.iterator();
-		while (itr.hasNext()) {
-			CityEntity cityNext = itr.next();
+		List<CityEntity> listOfCities = cities.stream().map(c -> c).collect(Collectors.toList());
+		for (int i = 0; i < listOfCities.size(); i++) {
+			CityEntity cityNext = listOfCities.get(i);
 			if (cityNext.getName().equals(city) && cityNext.getStateEntity().getAbbreviation().equals(state)) {
 				cities.remove(cityNext);
 			}
 		}
 		userEntity.setCities(cities);
 		return saveUser(userEntity).getCities();
+	}
+
+	@Override
+	public UserEntity getUserByUsername(String name) {
+		return userRepository.findOneByUsername(name);
 	}
 
 }

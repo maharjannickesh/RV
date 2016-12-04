@@ -20,10 +20,11 @@ public class StateAPIController {
 		return "Hellow Display";
 	}
 	
-	@RequestMapping(value="/{stateabb}/cities")
-	public List<String> getAllCitiesByState(@PathVariable("stateabb") String stateabb){
+	@RequestMapping(value="/{stateabb}/cities/{pageno}")
+	public List<String> getAllCitiesByState(@PathVariable("stateabb") String stateabb, @PathVariable("pageno") String pageno){
 		stateabb = stateabb.toUpperCase();
-		return stateService.getallCitiesByState(stateabb);
+		int page = Integer.parseInt(pageno);
+		return stateService.getallCitiesByState(stateabb, page);
 	}
 
 }

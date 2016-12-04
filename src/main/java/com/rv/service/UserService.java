@@ -23,4 +23,6 @@ public interface UserService {
 
 	public Set<CityEntity> deleteVisitedCity(String user, String city, String state);
 
+	public UserEntity getUserByUsername(String name);
+
 }

@@ -3,6 +3,7 @@ package com.rv.entity;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -13,7 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -36,7 +37,9 @@ public class UserEntity implements Serializable {
 	@Column(name = "LastName")
 	private String lastName;
 
-	@OneToMany(fetch = FetchType.EAGER)
+	private String username;
+
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "user_city", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "city_id"))
 	private Set<CityEntity> cities;
 
@@ -77,6 +80,14 @@ public class UserEntity implements Serializable {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public Set<CityEntity> getCities() {

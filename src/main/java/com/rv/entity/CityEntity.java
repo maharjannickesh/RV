@@ -2,6 +2,8 @@ package com.rv.entity;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Size;
 
@@ -32,6 +35,9 @@ public class CityEntity implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "StateID")
 	private StateEntity stateEntity;
+
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy="cities")
+	private List<UserEntity> users;
 
 	@NotEmpty
 	@Column(name = "Status")
