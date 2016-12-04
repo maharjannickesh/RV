@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.rv.entity.CityEntity;
@@ -15,7 +16,7 @@ import com.rv.repository.CityRepository;
 import com.rv.repository.StateRepository;
 
 @Service
-@Transactional
+@Transactional(propagation = Propagation.REQUIRES_NEW)
 public class StateServiceImpl implements StateService {
 
 	@Autowired
@@ -26,8 +27,8 @@ public class StateServiceImpl implements StateService {
 
 	@Override
 	public List<String> getallCitiesByState(String state, int page) {
-		System.out.println(page*10);
-		List<CityEntity> cities = cityRepository.findAllCityNameByStateEntityAbbreviation(state, new PageRequest(page*10, 10, Direction.DESC, "Id"));
+		List<CityEntity> cities = cityRepository.findAllCityNameByStateEntityAbbreviation(state,
+				new PageRequest(page * 10, 10, Direction.DESC, "Id"));
 		List<String> cityNames = cities.stream().map(c -> c.getName()).collect(Collectors.toList());
 		return cityNames;
 	}
