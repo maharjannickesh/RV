@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
 	public UserEntity insertVisitedCity(UserCityDTO userCityDTO, String user) {
 		if (cityService.validateCity(userCityDTO.getCity()) && stateService.verifyState(userCityDTO.getState())
 				&& cityService.validateCityAndState(userCityDTO.getCity(), userCityDTO.getState())) {
-			UserEntity userEntity = getUserByFirstName(user);
+			UserEntity userEntity = getUserByUsername(user);
 			CityEntity cityEntity = cityService.getCityByNameAndState(userCityDTO.getCity(), userCityDTO.getState());
 
 			Set<CityEntity> userCities = userEntity.getCities();
@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Set<String> visitedState(String user) {
-		UserEntity userEntity = getUserByFirstName(user);
+		UserEntity userEntity = getUserByUsername(user);
 		Set<CityEntity> userCities = userEntity.getCities();
 		Set<String> state = userCities.stream().map(c -> c.getStateEntity().getName()).collect(Collectors.toSet());
 		return state;

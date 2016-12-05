@@ -44,16 +44,13 @@ public class UserAPIController {
 
 	@RequestMapping(value = "/{user}/visits", method = RequestMethod.POST)
 	public UserEntity insertVisitedCity(@RequestBody UserCityDTO userCityDTO, @PathVariable("user") String user) {
-
 		return userService.insertVisitedCity(userCityDTO, user);
 
 	}
 
 	@RequestMapping(value = "/{user}/visits/states", method = RequestMethod.GET)
 	public Set<String> visitedState(@PathVariable("user") String user) {
-
 		return userService.visitedState(user);
-
 	}
 
 	@RequestMapping(value = "/{user}/visits/{visit}/{state}", method = RequestMethod.DELETE)

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 01, 2016 at 10:09 AM
+-- Generation Time: Dec 05, 2016 at 06:34 AM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 7.0.2
 
@@ -20,11 +20,17 @@ SET time_zone = "+00:00";
 -- Database: `DB_RV`
 --
 
+CREATE DATABASE IF NOT EXISTS 'DB_RV';
+
+USE DATABASE 'DB_RV';
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `city`
 --
+
+
 
 CREATE TABLE `city` (
   `Name` varchar(20) DEFAULT NULL,
@@ -631,26 +637,30 @@ INSERT INTO `state` (`Name`, `Abbreviation`, `DateAdded`, `DateTimeAdded`, `Last
 CREATE TABLE `user` (
   `FirstName` varchar(7) DEFAULT NULL,
   `LastName` varchar(8) DEFAULT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `enabled` int(11) NOT NULL,
   `DateAdded` date DEFAULT NULL,
   `DateTimeAdded` date DEFAULT NULL,
   `LastUpdated` date DEFAULT NULL,
-  `ID` int(11) NOT NULL
+  `ID` int(11) NOT NULL,
+  `role` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`FirstName`, `LastName`, `DateAdded`, `DateTimeAdded`, `LastUpdated`, `ID`) VALUES
-('Henry', 'Harrison', '2015-03-01', '2015-03-01', '2015-03-01', 1),
-('John', 'Smith', '2015-03-01', '2015-03-01', '2015-03-01', 2),
-('Jim', 'Smith', '2015-03-01', '2015-03-01', '2015-03-01', 3),
-('Jose', 'Gonzales', '2015-03-01', '2015-03-01', '2015-03-01', 4),
-('Andrew', 'Watson', '2015-03-01', '2015-03-01', '2015-03-01', 5),
-('Bill', 'Brown', '2015-03-01', '2015-03-01', '2015-03-01', 6),
-('Michael', 'Jackson', '2015-03-01', '2015-03-01', '2015-03-01', 7),
-('Eliscia', 'Smith', '2015-03-01', '2015-03-01', '2015-03-01', 8),
-('Chris', 'Jones', '2015-03-01', '2015-03-01', '2015-03-01', 9);
+INSERT INTO `user` (`FirstName`, `LastName`, `username`, `password`, `enabled`, `DateAdded`, `DateTimeAdded`, `LastUpdated`, `ID`, `role`) VALUES
+('Henry', 'Harrison', 'henry', '$2a$08$zPcG7krLe6ZNBSGRmatD2eAW.lKwX6CqrQhz0p.5HCqmq0S3OfsVK', 1, '2015-03-01', '2015-03-01', '2015-03-01', 1, 'ROLE_USER'),
+('John', 'Smith', 'john', '$2a$08$zPcG7krLe6ZNBSGRmatD2eAW.lKwX6CqrQhz0p.5HCqmq0S3OfsVK', 1, '2015-03-01', '2015-03-01', '2015-03-01', 2, 'ROLE_ADMIN'),
+('Jim', 'Smith', 'jim', '$2a$08$zPcG7krLe6ZNBSGRmatD2eAW.lKwX6CqrQhz0p.5HCqmq0S3OfsVK', 1, '2015-03-01', '2015-03-01', '2015-03-01', 3, NULL),
+('Jose', 'Gonzales', 'jose', '$2a$08$zPcG7krLe6ZNBSGRmatD2eAW.lKwX6CqrQhz0p.5HCqmq0S3OfsVK', 0, '2015-03-01', '2015-03-01', '2015-03-01', 4, NULL),
+('Andrew', 'Watson', 'andrew', '$2a$08$zPcG7krLe6ZNBSGRmatD2eAW.lKwX6CqrQhz0p.5HCqmq0S3OfsVK', 0, '2015-03-01', '2015-03-01', '2015-03-01', 5, NULL),
+('Bill', 'Brown', 'bill', '$2a$08$zPcG7krLe6ZNBSGRmatD2eAW.lKwX6CqrQhz0p.5HCqmq0S3OfsVK', 0, '2015-03-01', '2015-03-01', '2015-03-01', 6, NULL),
+('Michael', 'Jackson', 'michael', '$2a$08$zPcG7krLe6ZNBSGRmatD2eAW.lKwX6CqrQhz0p.5HCqmq0S3OfsVK', 0, '2015-03-01', '2015-03-01', '2015-03-01', 7, NULL),
+('Eliscia', 'Smith', 'eliscia', '$2a$08$zPcG7krLe6ZNBSGRmatD2eAW.lKwX6CqrQhz0p.5HCqmq0S3OfsVK', 0, '2015-03-01', '2015-03-01', '2015-03-01', 8, NULL),
+('Chris', 'Jones', 'chris', '$2a$08$zPcG7krLe6ZNBSGRmatD2eAW.lKwX6CqrQhz0p.5HCqmq0S3OfsVK', 0, '2015-03-01', '2015-03-01', '2015-03-01', 9, NULL);
 
 -- --------------------------------------------------------
 
@@ -668,8 +678,9 @@ CREATE TABLE `user_city` (
 --
 
 INSERT INTO `user_city` (`user_id`, `city_id`) VALUES
-(1, 1),
-(1, 5);
+(1, 5),
+(2, 1),
+(2, 5);
 
 --
 -- Indexes for dumped tables
@@ -680,7 +691,8 @@ INSERT INTO `user_city` (`user_id`, `city_id`) VALUES
 --
 ALTER TABLE `city`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `StateID` (`StateID`);
+  ADD KEY `StateID` (`StateID`),
+  ADD KEY `ID` (`ID`);
 
 --
 -- Indexes for table `state`
@@ -698,7 +710,7 @@ ALTER TABLE `user`
 -- Indexes for table `user_city`
 --
 ALTER TABLE `user_city`
-  ADD UNIQUE KEY `city_id` (`city_id`),
+  ADD PRIMARY KEY (`user_id`,`city_id`),
   ADD KEY `FK14350D5F7ED591CB` (`city_id`),
   ADD KEY `FK14350D5FB698ADCB` (`user_id`);
 
