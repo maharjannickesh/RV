@@ -15,6 +15,11 @@ import com.rv.entity.StateEntity;
 import com.rv.repository.CityRepository;
 import com.rv.repository.StateRepository;
 
+/**
+ * This class is a State Service
+ * 
+ * @author maharjan.nickesh
+ */
 @Service
 @Transactional(propagation = Propagation.REQUIRES_NEW)
 public class StateServiceImpl implements StateService {

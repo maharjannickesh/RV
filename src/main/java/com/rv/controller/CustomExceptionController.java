@@ -9,6 +9,12 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 import com.rv.exception.DataNotFoundException;
 import com.rv.exception.ErrorMessage;
 
+/**
+ * This class is a Custom Exception Controller for handling exceptions.
+ * 
+ * @author maharjan.nickesh
+ */
+
 @ControllerAdvice
 public class CustomExceptionController {
 
@@ -19,7 +25,7 @@ public class CustomExceptionController {
 		return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
 
 	}
-	
+
 	@ExceptionHandler(NoHandlerFoundException.class)
 	public ResponseEntity<ErrorMessage> handleNoHandlerFoundException(NoHandlerFoundException ex) {
 		ErrorMessage errorMessage = new ErrorMessage(ex.getMessage(), 404, "Requested Page Not Found");

@@ -17,6 +17,12 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+/**
+ * This class is a City Entity
+ * 
+ * @author maharjan.nickesh
+ */
+
 @Entity(name = "city")
 public class CityEntity implements Serializable {
 
@@ -36,7 +42,7 @@ public class CityEntity implements Serializable {
 	@JoinColumn(name = "StateID")
 	private StateEntity stateEntity;
 
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy="cities")
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "cities")
 	private List<UserEntity> users;
 
 	@NotEmpty

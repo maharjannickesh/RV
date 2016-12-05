@@ -2,6 +2,12 @@ package com.rv.exception;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ * This class is a Error Message that store actual exception message, code and related documentation
+ * 
+ * @author maharjan.nickesh
+ */
+
 @XmlRootElement
 public class ErrorMessage {
 

@@ -7,6 +7,13 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+
+/**
+ * This class is a class for returning template required to consume rest service
+ * 
+ * @author maharjan.nickesh
+ */
+
 @Component
 public class RemoteAPI {
 

@@ -19,6 +19,12 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+/**
+ * This class is a User Entity
+ * 
+ * @author maharjan.nickesh
+ */
+
 @Entity(name = "user")
 public class UserEntity implements Serializable {
 
@@ -38,6 +44,10 @@ public class UserEntity implements Serializable {
 	private String lastName;
 
 	private String username;
+
+	private String password;
+
+	private boolean enabled;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "user_city", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "city_id"))
@@ -88,6 +98,22 @@ public class UserEntity implements Serializable {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 
 	public Set<CityEntity> getCities() {

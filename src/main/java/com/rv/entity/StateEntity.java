@@ -10,10 +10,15 @@ import javax.persistence.Id;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
 
+/**
+ * This class is a State Entity
+ * 
+ * @author maharjan.nickesh
+ */
+
 @Entity(name = "state")
 public class StateEntity implements Serializable {
 
-	
 	private static final long serialVersionUID = -4148190483582270038L;
 
 	@Id

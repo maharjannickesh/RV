@@ -20,9 +20,15 @@ SET time_zone = "+00:00";
 -- Database: `DB_RV`
 --
 
-CREATE DATABASE IF NOT EXISTS 'DB_RV';
+CREATE DATABASE IF NOT EXISTS DB_RV;
 
-USE DATABASE 'DB_RV';
+USE DB_RV;
+
+DROP TABLE IF EXISTS city;
+DROP TABLE IF EXISTS state;
+DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS user_city;
+
 
 -- --------------------------------------------------------
 

@@ -20,6 +20,11 @@ import com.rv.exception.DataNotFoundException;
 import com.rv.service.CityService;
 import com.rv.service.UserService;
 
+/**
+ * This class is a UserAPI controller
+ * @author maharjan.nickesh
+ */
+
 @RestController
 @RequestMapping("/user")
 public class UserAPIController {

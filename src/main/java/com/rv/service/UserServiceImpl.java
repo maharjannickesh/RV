@@ -10,8 +10,13 @@ import org.springframework.transaction.annotation.Transactional;
 import com.rv.dto.UserCityDTO;
 import com.rv.entity.CityEntity;
 import com.rv.entity.UserEntity;
-import com.rv.repository.CityRepository;
 import com.rv.repository.UserRepository;
+
+/**
+ * This class is a User Service
+ * 
+ * @author maharjan.nickesh
+ */
 
 @Service
 @Transactional(propagation = Propagation.REQUIRES_NEW)

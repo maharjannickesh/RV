@@ -7,7 +7,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import com.rv.entity.CityEntity;
 
-
+/**
+ * This class is a City Repositiry
+ * 
+ * @author maharjan.nickesh
+ */
 @Repository
 public interface CityRepository extends JpaRepository<CityEntity, Integer> {
 
@@ -16,9 +20,7 @@ public interface CityRepository extends JpaRepository<CityEntity, Integer> {
 	CityEntity findOneByName(String cityName);
 
 	List<CityEntity> findAllByName(String cityName);
-	
+
 	CityEntity findOneCityNameByUsersUsername(String user);
-	
-	
-	
+
 }
