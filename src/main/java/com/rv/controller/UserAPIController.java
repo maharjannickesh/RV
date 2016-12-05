@@ -35,8 +35,8 @@ public class UserAPIController {
 	@Autowired
 	private CityService cityService;
 
-	@Autowired
-	private RemoteAPI remoteAPI;
+	
+	private RemoteAPI remoteAPI  = new RemoteAPI() ;
 
 	@RequestMapping(value = "/{user}/visits", method = RequestMethod.GET)
 	public List<String> visitedCity(@PathVariable("user") String user) {

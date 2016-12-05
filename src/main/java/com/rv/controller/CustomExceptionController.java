@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
+import com.rv.dto.ErrorMessage;
 import com.rv.exception.DataNotFoundException;
-import com.rv.exception.ErrorMessage;
 
 /**
  * This class is a Custom Exception Controller for handling exceptions.
@@ -21,21 +21,21 @@ public class CustomExceptionController {
 	@ExceptionHandler(DataNotFoundException.class)
 	public ResponseEntity<ErrorMessage> handleDataNotFoundException(DataNotFoundException ex) {
 
-		ErrorMessage errorMessage = new ErrorMessage(ex.getMessage(), 404, "Documentation Goes Here");
+		ErrorMessage errorMessage = new ErrorMessage(ex.getMessage(), 404);
 		return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
 
 	}
 
 	@ExceptionHandler(NoHandlerFoundException.class)
 	public ResponseEntity<ErrorMessage> handleNoHandlerFoundException(NoHandlerFoundException ex) {
-		ErrorMessage errorMessage = new ErrorMessage(ex.getMessage(), 404, "Requested Page Not Found");
+		ErrorMessage errorMessage = new ErrorMessage(ex.getMessage(), 404);
 		return new ResponseEntity<ErrorMessage>(errorMessage, HttpStatus.BAD_REQUEST);
 	}
 
 	@ExceptionHandler(Exception.class)
-	public ResponseEntity<ErrorMessage> handleAllException(Exception ex) {
-		ErrorMessage errorMessage = new ErrorMessage(ex.getMessage(), 400, "Documentation Goes Here");
-		return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
+	public ResponseEntity<ErrorMessage> handleAllException(Throwable ex) {
+		ErrorMessage errorMessage = new ErrorMessage(ex.getMessage(), 500);
+		return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
 
 	}
 

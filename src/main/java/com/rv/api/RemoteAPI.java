@@ -4,7 +4,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 
@@ -14,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
  * @author maharjan.nickesh
  */
 
-@Component
+
 public class RemoteAPI {
 
 	private RestTemplate restTemplate;

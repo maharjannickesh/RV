@@ -1,6 +1,4 @@
-package com.rv.exception;
-
-import javax.xml.bind.annotation.XmlRootElement;
+package com.rv.dto;
 
 /**
  * This class is a Error Message that store actual exception message, code and related documentation
@@ -8,21 +6,18 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author maharjan.nickesh
  */
 
-@XmlRootElement
+
 public class ErrorMessage {
 
 	private String errorMessage;
 	private int errorCode;
-	private String Documentation;
 
 	public ErrorMessage() {
 	}
 
-	public ErrorMessage(String errorMessage, int errorCode, String documentation) {
-		super();
+	public ErrorMessage(String errorMessage, int errorCode) {
 		this.errorMessage = errorMessage;
 		this.errorCode = errorCode;
-		Documentation = documentation;
 	}
 
 	public String getErrorMessage() {
@@ -41,12 +36,6 @@ public class ErrorMessage {
 		this.errorCode = errorCode;
 	}
 
-	public String getDocumentation() {
-		return Documentation;
-	}
 
-	public void setDocumentation(String documentation) {
-		Documentation = documentation;
-	}
 
 }
