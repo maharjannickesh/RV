@@ -17,6 +17,8 @@ public interface CityRepository extends JpaRepository<CityEntity, Integer> {
 
 	List<CityEntity> findAllByName(String cityName);
 	
+	CityEntity findOneCityNameByUsersUsername(String user);
+	
 	
 	
 }

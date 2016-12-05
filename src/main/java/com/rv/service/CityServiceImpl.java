@@ -50,4 +50,9 @@ public class CityServiceImpl implements CityService {
 		return null;
 	}
 
+	@Override
+	public CityEntity lastVisitedCity(String user) {
+		return cityRepository.findOneCityNameByUsersUsername(user);
+	}
+
 }

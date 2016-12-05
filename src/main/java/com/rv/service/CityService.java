@@ -9,4 +9,6 @@ public interface CityService {
 	public boolean validateCityAndState(String city, String State);
 
 	public CityEntity getCityByNameAndState(String city, String state);
+
+	public CityEntity lastVisitedCity(String user);
 }
