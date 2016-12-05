@@ -10,6 +10,12 @@ import org.springframework.transaction.annotation.Transactional;
 import com.rv.entity.CityEntity;
 import com.rv.repository.CityRepository;
 
+/**
+ * This class is a City Service
+ * 
+ * @author maharjan.nickesh
+ */
+
 @Service
 @Transactional(propagation = Propagation.REQUIRES_NEW)
 public class CityServiceImpl implements CityService {

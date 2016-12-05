@@ -30,10 +30,10 @@
 		<property name="jpaPropertyMap">
 			<map>
 				<entry key="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
-				<entry key="hibernate.hbm2ddl.auto" value="update" />
+				<entry key="hibernate.hbm2ddl.auto" value="create" />
 				<entry key="hibernate.format_sql" value="true" />
 				<entry key="hibernate.show_sql" value="true" />
-				<entry key="hibernate.hbm2ddl.import_files" value="DB_RV.sql"></entry>
+				<entry key="hibernate.hbm2ddl.import_files" value="import.sql"></entry>
 			</map>
 		</property>
 	</bean>

@@ -10,7 +10,7 @@
  About database; 
  1. The database is MySql.
  2. Please config the databse in rv-config.properties as per the user machine. 
- 3. The database is provided in the classpath database folder. 
+ 3. The database is provided in the resources folder. 
  
  Server
  1. Jetty and Tomcat server has been used. By Default jetty is in use. 
