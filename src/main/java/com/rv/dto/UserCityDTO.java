@@ -1,5 +1,10 @@
 package com.rv.dto;
 
+/**
+ * This class is a User DTO for 
+ * @author maharjan.nickesh
+ */
+
 public class UserCityDTO {
 
 	private String city;

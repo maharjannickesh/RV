@@ -8,6 +8,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.rv.service.StateService;
 
+
+/**
+ * This class is a StateAPI controller
+ * @author maharjan.nickesh
+ */
+
 @RestController
 @RequestMapping("/state")
 public class StateAPIController {
